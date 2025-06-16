@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import type { D1Database, KVNamespace, R2Bucket } from '@cloudflare/workers-types';
 import authEndpoints from './api/auth';
 import projectsEndpoints from './api/projects';
+import tasksEndpoints from './api/tasks';
 import { withDb } from './middleware/withDb';
 import { withKvSessions } from './middleware/withKvSessions';
 import { verifyJWT } from './middleware/verifyJWT';
@@ -27,6 +28,7 @@ app.get('/api/health', (c) => c.json({ status: 'ok' }));
 
 app.route('/api/auth/', authEndpoints);
 app.route('/api/projects/', projectsEndpoints);
+app.route('/api/projects/', tasksEndpoints);
 
 app.notFound((c) => {
   return c.json({ error: 'Not Found' }, 404);

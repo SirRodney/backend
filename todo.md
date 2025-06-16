@@ -24,8 +24,8 @@
 ## 4. Protected API Endpoints
 - [x] GET /projects (admin, member, viewer)
 - [x] POST /projects (admin, member)
-- [ ] CRUD /projects/:id/tasks (role-based, Zod validation)
-- [ ] Ensure all SELECTs filter by tenant_id
+- [x] CRUD /projects/:id/tasks (role-based, Zod validation)
+- [x] Ensure all SELECTs filter by tenant_id
 
 ## 5. Security & Best Practices
 - [ ] Rate-limit by IP: 60 req/min (using @hono/ratelimit + KV)
