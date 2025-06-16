@@ -18,7 +18,7 @@
 - [x] Implement POST /auth/refresh (returns new Access-Token)
 - [x] Implement POST /auth/logout (revokes Refresh-Token)
 - [x] Store refresh tokens in Workers KV (kv_sessions)
-- [ ] Implement verifyJWT middleware (injects user into context)
+- [x] Implement verifyJWT middleware (injects user into context)
 - [x] Implement authorize(role[]) middleware (checks user role and tenant_id)
 
 ## 4. Protected API Endpoints
