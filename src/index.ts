@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import type { D1Database, KVNamespace, R2Bucket } from '@cloudflare/workers-types';
 import authEndpoints from './api/auth';
 import { withDb } from './middleware/withDb';
+import { withKvSessions } from './middleware/withKvSessions';
 
 export interface Env {
   DB: D1Database;
@@ -13,6 +14,10 @@ const app = new Hono<{ Bindings: Env }>()
 
 // Attach Drizzle DB instance to context for all routes
 app.use('*', withDb);
+
+// Add KV sessions middleware for authentication routes
+app.use('/api/auth/*', withKvSessions);
+
 
 app.get('/', (c) => c.redirect('/api/'))
 app.get('/api/', (c) => c.text('Hello, World!'));

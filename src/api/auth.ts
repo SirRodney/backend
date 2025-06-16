@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { createKvSessions } from '../utils/kv_sessions';
-import { generateAccessToken, generateRefreshToken, validateRefreshToken } from '../utils/jwt';
+import { generateAccessToken, generateRefreshToken, validateRefreshToken, revokeRefreshToken } from '../utils/jwt';
 import { findUserByEmail, createNewUser, findUserBySessionId, verifyPassword } from '../utils/user';
 
 const app = new Hono();
@@ -29,8 +29,8 @@ app.post('/login', async (c) => {
         if (!user || !verifyPassword(user, password)) {
             return c.json({ error: 'Invalid credentials' }, 401);
         }
-        const accessToken = await generateAccessToken(user);
-        const refreshToken = generateRefreshToken(user);
+        const accessToken = await generateAccessToken(c, user);
+        const refreshToken = generateRefreshToken(c, user);
         return c.json({ accessToken, refreshToken });
     } catch (error) {
         return c.json({ error: 'Internal server error' }, 500);
@@ -43,7 +43,7 @@ app.post('/refresh', async (c) => {
         if (!refreshToken) {
             return c.json({ error: 'Refresh token is required' }, 400);
         }
-        const session = await validateRefreshToken(refreshToken);
+        const session = await validateRefreshToken(c, refreshToken);
         if (!session) {
             return c.json({ error: 'Invalid or expired refresh token' }, 401);
         }
@@ -51,7 +51,7 @@ app.post('/refresh', async (c) => {
         if (!user) {
             return c.json({ error: 'User not found' }, 404);
         }
-        const accessToken = generateAccessToken(user);
+        const accessToken = await generateAccessToken(c, user);
         return c.json({ accessToken });
     } catch (error) {
         console.error('Error in /refresh:', error);
@@ -66,10 +66,22 @@ app.post('/refresh', async (c) => {
 app.post('/logout', async (c) => {
     try {
         const { refreshToken } = await c.req.json();
-        await kv_sessions.delete(refreshToken);
-        return c.json({ success: true });
+        if (!refreshToken) {
+            return c.json({ error: 'Refresh token is required' }, 400);
+        }
+        const result = await revokeRefreshToken(c, refreshToken);
+        if (result) {
+            return c.json({ message: 'Logged out successfully' });
+        } else {
+            return c.json({ error: 'Failed to logout' }, 500);
+        }
     } catch (error) {
-        return c.json({ error: 'Internal server error' }, 500);
+        console.error('Error in /logout:', error);
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        return c.json({
+            error: 'Failed to logout',
+            details: errorMessage
+        }, 500);
     }
 });
 
