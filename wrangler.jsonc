@@ -1,0 +1,33 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "prueba-backend-multitenant",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-06-14",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "c322c52401a14f4187b5a26b17aaa1d4"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "bucket-backend-multitenant"
+    }
+  ],
+    "d1_databases": [
+      {
+        "binding": "DB",
+        "database_name": "db-backend-multitenant",
+        "database_id": "40ec6982-95d1-438e-9414-d38866b2e3b8",
+        "migrations_dir": "drizzle/migrations"
+      }
+    ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}
