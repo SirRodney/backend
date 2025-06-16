@@ -22,8 +22,8 @@
 - [x] Implement authorize(role[]) middleware (checks user role and tenant_id)
 
 ## 4. Protected API Endpoints
-- [ ] GET /projects (admin, member, viewer)
-- [ ] POST /projects (admin, member)
+- [x] GET /projects (admin, member, viewer)
+- [x] POST /projects (admin, member)
 - [ ] CRUD /projects/:id/tasks (role-based, Zod validation)
 - [ ] Ensure all SELECTs filter by tenant_id
 
