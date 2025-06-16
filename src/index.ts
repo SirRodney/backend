@@ -1,5 +1,7 @@
 import { Hono } from 'hono'
 import type { D1Database, KVNamespace, R2Bucket } from '@cloudflare/workers-types';
+import authEndpoints from './api/auth';
+import { withDb } from './middleware/withDb';
 
 export interface Env {
   DB: D1Database;
@@ -9,13 +11,14 @@ export interface Env {
 
 const app = new Hono<{ Bindings: Env }>()
 
+// Attach Drizzle DB instance to context for all routes
+app.use('*', withDb);
+
+app.get('/', (c) => c.redirect('/api/'))
 app.get('/api/', (c) => c.text('Hello, World!'));
 app.get('/api/health', (c) => c.json({ status: 'ok' }));
 
-app.onError((err, c) => {
-  console.error('Error:', err);
-  return c.json({ error: 'Internal Server Error' }, 500);
-});
+app.route('/api/auth', authEndpoints);
 
 app.notFound((c) => {
   return c.json({ error: 'Not Found' }, 404);

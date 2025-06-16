@@ -14,9 +14,9 @@
 - [x] Add npm script: `db:seed` to insert example data (admin@acme.com / Passw0rd! in a sample tenant)
 
 ## 3. Authentication & Authorization
-- [ ] Implement POST /auth/login (returns JWT + Refresh-Token)
-- [ ] Implement POST /auth/refresh (returns new Access-Token)
-- [ ] Implement POST /auth/logout (revokes Refresh-Token)
+- [x] Implement POST /auth/login (returns JWT + Refresh-Token)
+- [x] Implement POST /auth/refresh (returns new Access-Token)
+- [x] Implement POST /auth/logout (revokes Refresh-Token)
 - [ ] Store refresh tokens in Workers KV (kv_sessions)
 - [ ] Implement verifyJWT middleware (injects user into context)
 - [ ] Implement authorize(role[]) middleware (checks user role and tenant_id)
