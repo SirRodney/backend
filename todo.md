@@ -8,10 +8,10 @@
 - [x] Set up Hono framework
 
 ## 2. Data Model & Migrations
-- [ ] Define tables: tenants, users, projects, tasks, (optional: attachments)
-- [ ] Ensure all tables are scoped by tenant_id
-- [ ] Generate migrations with Drizzle Kit
-- [ ] Add npm script: `db:seed` to insert example data (admin@acme.com / Passw0rd! in a sample tenant)
+- [x] Define tables: tenants, users, projects, tasks, (optional: attachments)
+- [x] Ensure all tables are scoped by tenant_id
+- [x] Generate migrations with Drizzle Kit
+- [x] Add npm script: `db:seed` to insert example data (admin@acme.com / Passw0rd! in a sample tenant)
 
 ## 3. Authentication & Authorization
 - [ ] Implement POST /auth/login (returns JWT + Refresh-Token)
