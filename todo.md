@@ -5,7 +5,7 @@
 - [x] Set up Node.js (>=18), Wrangler CLI (3.x), and Cloudflare account
 - [x] Configure wrangler.toml/jsonc with D1, KV, (optional R2), and environment variables
 - [x] Set up Drizzle ORM and Drizzle Kit
-- [ ] Set up Hono framework
+- [x] Set up Hono framework
 
 ## 2. Data Model & Migrations
 - [ ] Define tables: tenants, users, projects, tasks, (optional: attachments)
