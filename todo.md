@@ -34,11 +34,11 @@
 - [ ] Validate schemas with Zod (body, params, query)
 
 ## 6. Deployment
-- [ ] Deploy with wrangler deploy
-- [ ] Verify public URL is operational
+- [x] Deploy with wrangler deploy
+- [x] Verify public URL is operational
 
 ## 7. Documentation & Presentation
-- [ ] Add instructions for testing API (headers, seed credentials, etc.)
+- [x] Add instructions for testing API (headers, seed credentials, etc.)
 - [ ] Open Pull Request with observations, production URL, and improvements
 - [ ] List any missing features or limitations
 
