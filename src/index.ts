@@ -6,6 +6,7 @@ import tasksEndpoints from './api/tasks';
 import { withDb } from './middleware/withDb';
 import { withKvSessions } from './middleware/withKvSessions';
 import { verifyJWT } from './middleware/verifyJWT';
+import { rateLimit } from './middleware/rateLimit';
 
 export interface Env {
   DB: D1Database;
@@ -14,6 +15,9 @@ export interface Env {
 }
 
 const app = new Hono<{ Bindings: Env }>()
+
+// Apply rate limiting to all API endpoints
+app.use('/api/*', rateLimit);
 
 // Attach Drizzle DB instance to context for all routes
 app.use('*', withDb);

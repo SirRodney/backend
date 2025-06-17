@@ -28,8 +28,8 @@
 - [x] Ensure all SELECTs filter by tenant_id
 
 ## 5. Security & Best Practices
-- [ ] Rate-limit by IP: 60 req/min (using @hono/ratelimit + KV)
-- [ ] Rate-limit by API-Key: 1,000 req/day (header X-API-Key)
+- [x] Rate-limit by IP: 60 req/min (using @hono-rate-limiter/cloudflare + KV)
+- [x] Rate-limit by API-Key: 1,000 req/day (header X-API-Key)
 - [ ] Strict CORS (whitelist Origin)
 - [ ] Validate schemas with Zod (body, params, query)
 

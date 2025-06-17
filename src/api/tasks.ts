@@ -5,6 +5,7 @@ import { eq, and } from 'drizzle-orm';
 import { projects, tasks } from '../db/schema';
 import { auth, AuthUser } from '../middleware/authorizeRBAC';
 import { Context } from 'hono';
+import { D1Database } from '@cloudflare/workers-types';
 
 // Task validation schemas
 const taskSchema = z.object({
