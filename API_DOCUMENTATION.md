@@ -6,6 +6,7 @@ This document provides comprehensive information about the available API endpoin
 - [Authentication](#authentication)
 - [Projects API](#projects-api)
 - [Tasks API](#tasks-api)
+- [Security](#security)
 - [Error Handling](#error-handling)
 - [Testing with Postman](#testing-with-postman)
 
@@ -362,7 +363,37 @@ Common HTTP status codes:
 - `429 Too Many Requests`: Rate limit exceeded
 - `500 Internal Server Error`: Server-side error
 
-## Rate Limiting
+## Security
+
+### Cross-Origin Resource Sharing (CORS)
+
+The API implements strict CORS policies that only allow requests from whitelisted origins:
+
+- **Allowed Origins**:
+  - `http://localhost:8787` (local development)
+  - `https://prueba-backend-multitenant.luis-leivag23.workers.dev` (production)
+
+- **Allowed Methods**: `GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`
+
+- **Allowed Headers**:
+  - `Content-Type`
+  - `Authorization`
+  - `X-API-Key`
+  - `X-Requested-With`
+
+- **Exposed Headers**:
+  - `X-RateLimit-Limit`
+  - `X-RateLimit-Remaining`
+  - `X-RateLimit-Reset`
+  - `Retry-After`
+
+- **Credentials**: Supported (cookies, authorization headers)
+
+- **Preflight Cache**: 1 hour (3600 seconds)
+
+Requests from origins not in the whitelist will not be able to access the API resources.
+
+### Rate Limiting
 
 The API implements rate limiting to ensure fair usage and protect against abuse:
 

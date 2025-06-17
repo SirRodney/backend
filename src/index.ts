@@ -7,6 +7,7 @@ import { withDb } from './middleware/withDb';
 import { withKvSessions } from './middleware/withKvSessions';
 import { verifyJWT } from './middleware/verifyJWT';
 import { rateLimit } from './middleware/rateLimit';
+import { corsPolicy } from './middleware/corsPolicy';
 
 export interface Env {
   DB: D1Database;
@@ -15,6 +16,9 @@ export interface Env {
 }
 
 const app = new Hono<{ Bindings: Env }>()
+
+// Apply strict CORS policy to all routes
+app.use('*', corsPolicy);
 
 // Apply rate limiting to all API endpoints
 app.use('/api/*', rateLimit);

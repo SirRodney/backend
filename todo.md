@@ -30,7 +30,7 @@
 ## 5. Security & Best Practices
 - [x] Rate-limit by IP: 60 req/min (using @hono-rate-limiter/cloudflare + KV)
 - [x] Rate-limit by API-Key: 1,000 req/day (header X-API-Key)
-- [ ] Strict CORS (whitelist Origin)
+- [x] Strict CORS (whitelist Origin)
 - [ ] Validate schemas with Zod (body, params, query)
 
 ## 6. Deployment
