@@ -4,6 +4,7 @@ import { validator } from 'hono/validator';
 import { eq, and } from 'drizzle-orm';
 import { projects } from '../db/schema';
 import { auth, AuthUser } from '../middleware/authorizeRBAC';
+import { D1Database } from '@cloudflare/workers-types';
 
 const projectSchema = z.object({
   name: z.string().min(3).max(100).trim(),
