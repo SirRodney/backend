@@ -359,7 +359,31 @@ Common HTTP status codes:
 - `401 Unauthorized`: Missing or invalid authentication
 - `403 Forbidden`: Not enough permissions
 - `404 Not Found`: Resource not found
+- `429 Too Many Requests`: Rate limit exceeded
 - `500 Internal Server Error`: Server-side error
+
+## Rate Limiting
+
+The API implements rate limiting to ensure fair usage and protect against abuse:
+
+### IP-Based Rate Limiting
+- **Limit**: 60 requests per minute
+- **Applies to**: All requests without an API key
+- **Response Headers**:
+  - `X-RateLimit-Limit`: Maximum requests allowed in the window
+  - `X-RateLimit-Remaining`: Number of requests remaining in the window
+  - `X-RateLimit-Reset`: Timestamp when the rate limit window resets (Unix timestamp in seconds)
+  - `Retry-After`: Seconds to wait before making another request (only sent when limit is exceeded)
+
+### API Key Rate Limiting
+- **Limit**: 1,000 requests per day
+- **Applies to**: Requests with an `X-API-Key` header
+- **Usage**: Add your API key in the request headers
+  ```
+  X-API-Key: your-api-key-here
+  ```
+
+When a rate limit is exceeded, the API returns a `429 Too Many Requests` status code with details about the limit and when it resets.
 
 ## Testing with Postman
 
