@@ -1,0 +1,38 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "prueba-backend-multitenant",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-06-14",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "vars": {
+    "JWT_SECRET": "f18e44bb1d6d53ba4fee083dfa4e21f8e289afeb0bd2891059f0a1cb68481339",
+    "API_KEY": "14c77ed50fa7d30a5d59835e57059ed7756dae8a5a807f32",
+    "KV_ID": "c322c52401a14f4187b5a26b17aaa1d4",
+  },
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "c322c52401a14f4187b5a26b17aaa1d4"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "bucket-backend-multitenant"
+    }
+  ],
+    "d1_databases": [
+      {
+        "binding": "DB",
+        "database_name": "db-backend-multitenant",
+        "database_id": "40ec6982-95d1-438e-9414-d38866b2e3b8",
+        "migrations_dir": "drizzle/"
+      }
+    ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}
